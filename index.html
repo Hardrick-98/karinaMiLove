@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Para Karina ❤️</title>
+
+<style>
+body{
+    margin:0;
+    height:100vh;
+    background: linear-gradient(135deg,#ff9a9e,#fecfef);
+    font-family: Arial, Helvetica, sans-serif;
+    overflow:hidden;
+    text-align:center;
+    color:white;
+}
+
+/* ositos */
+.dudu{
+    position:absolute;
+    width:160px;
+    bottom:0;
+    left:5%;
+}
+.bubu{
+    position:absolute;
+    width:160px;
+    bottom:0;
+    right:5%;
+}
+
+/* cartel */
+.cartel{
+    position:absolute;
+    top:18%;
+    left:50%;
+    transform:translateX(-50%);
+    background:white;
+    color:#ff4d6d;
+    padding:20px;
+    border-radius:20px;
+    font-size:24px;
+    font-weight:bold;
+    box-shadow:0 0 15px rgba(0,0,0,0.3);
+}
+
+.botones{
+    position:absolute;
+    top:45%;
+    left:50%;
+    transform:translateX(-50%);
+}
+
+button{
+    font-size:20px;
+    padding:12px 25px;
+    margin:10px;
+    border:none;
+    border-radius:12px;
+    cursor:pointer;
+}
+
+#si{ background:#ff4d6d; color:white; }
+#no{ background:white; color:#ff4d6d; position:relative; }
+
+#final{
+    display:none;
+    position:absolute;
+    top:30%;
+    left:50%;
+    transform:translateX(-50%);
+    font-size:26px;
+    width:85%;
+}
+
+.heart{
+    position:absolute;
+    color:white;
+    font-size:24px;
+    animation:flotar 4s linear infinite;
+}
+
+@keyframes flotar{
+    from{transform:translateY(0);opacity:1;}
+    to{transform:translateY(-800px);opacity:0;}
+}
+</style>
+</head>
+
+<body>
+
+<!-- MUSICA -->
+<audio id="musica" loop>
+  <source src="musica.mp3" type="audio/mpeg">
+</audio>
+
+<img src="dudu.png" class="dudu">
+<img src="bubu.png" class="bubu">
+
+<div class="cartel" id="pregunta">
+Karina ❤️<br>
+¿Quieres ser mi San Valentín?
+</div>
+
+<div class="botones" id="botones">
+<button id="si">Sí 💖</button>
+<button id="no">No 😅</button>
+</div>
+
+<div id="final">
+Karina...<br><br>
+Desde que llegaste a mi vida todo es más bonito.<br><br>
+No solo quiero este 14 contigo,<br>
+quiero todos los que existan ❤️
+</div>
+
+<script>
+
+const musica = document.getElementById("musica");
+const noBtn = document.getElementById("no");
+const siBtn = document.getElementById("si");
+
+/* el NO huye */
+noBtn.addEventListener("touchstart", mover);
+noBtn.addEventListener("mouseover", mover);
+
+function mover(){
+    const x = Math.random() * (window.innerWidth - 100);
+    const y = Math.random() * (window.innerHeight - 50);
+    noBtn.style.position="absolute";
+    noBtn.style.left=x+"px";
+    noBtn.style.top=y+"px";
+}
+
+/* cuando presiona SI */
+siBtn.addEventListener("click",()=>{
+
+    // reproducir musica
+    musica.play().catch(()=>{});
+
+    document.getElementById("pregunta").style.display="none";
+    document.getElementById("botones").style.display="none";
+    document.getElementById("final").style.display="block";
+
+    corazones();
+});
+
+/* corazones flotando */
+function corazones(){
+    setInterval(()=>{
+        const heart=document.createElement("div");
+        heart.classList.add("heart");
+        heart.innerHTML="❤️";
+        heart.style.left=Math.random()*window.innerWidth+"px";
+        heart.style.top=window.innerHeight+"px";
+        heart.style.fontSize=(20+Math.random()*30)+"px";
+        document.body.appendChild(heart);
+        setTimeout(()=>heart.remove(),4000);
+    },300);
+}
+
+</script>
+
+</body>
+</html>
